@@ -6,6 +6,12 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Notification popup -->
+  <div id="notification" class="notification hidden">
+    <span id="notification-message"></span>
+    <button id="notification-close" class="notification-close">&times;</button>
+  </div>
+
   <div class="app-container">
     <header class="app-header">
       <h1>CareerFolio</h1>
@@ -21,7 +27,7 @@
           <form id="login-form">
             <div class="form-group">
               <label for="login-email">ETSU Email</label>
-              <input type="email" id="login-email" required placeholder="you@etsu.edu" />
+              <input type="email" id="login-email" required placeholder="example@etsu.edu" />
             </div>
 
             <div class="form-group">
@@ -102,6 +108,7 @@
 
         <!-- PROGRESS TAB -->
         <div id="tab-progress" class="tab-panel active">
+          <!-- Resume card -->
           <div class="card">
             <h3>Resume Progress</h3>
             <p class="helper-text">
@@ -113,6 +120,10 @@
               <p><strong>Status:</strong> <span id="resume-status">N/A</span></p>
               <p><strong>Last updated:</strong> <span id="resume-updated">N/A</span></p>
             </div>
+
+            <button id="resume-cancel-btn" class="btn danger small hidden">
+              Cancel pending resume
+            </button>
 
             <form id="resume-form" class="resume-form">
               <div class="form-group">
@@ -128,6 +139,41 @@
               <p id="resume-success" class="success-message"></p>
 
               <button type="submit" class="btn primary">Submit Resume</button>
+            </form>
+          </div>
+
+          <!-- Intro video card -->
+          <div class="card">
+            <h3>Introduction Video</h3>
+            <p class="helper-text">
+              Add a short introduction video to give recruiters more context about you.
+              MP4 format only, up to 50 MB.
+            </p>
+
+            <div class="video-status">
+              <p><strong>Current file:</strong> <span id="video-filename">None uploaded</span></p>
+              <p><strong>Status:</strong> <span id="video-status">N/A</span></p>
+              <p><strong>Last updated:</strong> <span id="video-updated">N/A</span></p>
+            </div>
+
+            <button id="video-cancel-btn" class="btn danger small hidden">
+              Cancel pending video
+            </button>
+
+            <form id="video-form" class="resume-form">
+              <div class="form-group">
+                <label for="video-file">Upload / Replace Intro Video (MP4 only, max 50 MB)</label>
+                <input
+                  type="file"
+                  id="video-file"
+                  accept="video/mp4"
+                />
+              </div>
+
+              <p id="video-error" class="error-message"></p>
+              <p id="video-success" class="success-message"></p>
+
+              <button type="submit" class="btn primary">Submit Video</button>
             </form>
           </div>
         </div>
@@ -188,18 +234,6 @@
               <li class="inbox-empty">
                 No messages yet. When recruiters contact you, their messages will show up here.
               </li>
-              <!-- Example structure you can demo later:
-              <li class="inbox-item">
-                <div class="inbox-meta">
-                  <span class="inbox-from">Jane Smith · Acme Corp</span>
-                  <span class="inbox-date">12/18/2025 · 09:42 AM</span>
-                </div>
-                <div class="inbox-subject">Interested in your resume for a Software Engineer role</div>
-                <p class="inbox-preview">
-                  Hi Ransome, we came across your profile on CareerFolio and would love to...
-                </p>
-              </li>
-              -->
             </ul>
           </div>
         </div>
