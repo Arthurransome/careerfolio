@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareerFolio - Student Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>CareerFolio</h1>
+      <p class="tagline">ETSU student resumes in one place.</p>
+    </header>
+
+    <main>
+      <!-- AUTH SECTION -->
+      <section id="auth-section">
+        <!-- Login form -->
+        <div id="login-card" class="card">
+          <h2>Login</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-email">ETSU Email</label>
+              <input type="email" id="login-email" required placeholder="you@etsu.edu" />
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" required />
+            </div>
+
+            <p id="login-error" class="error-message"></p>
+
+            <button type="submit" class="btn primary">Login</button>
+          </form>
+
+          <p class="helper-text">
+            Don't have an account?
+            <button id="go-to-signup" class="link-btn">Create one</button>
+          </p>
+        </div>
+
+        <!-- Sign up form -->
+        <div id="signup-card" class="card hidden">
+          <h2>Create Account</h2>
+          <form id="signup-form">
+
+            <div class="form-group">
+              <label for="signup-first">First Name</label>
+              <input type="text" id="signup-first" required placeholder="John" />
+            </div>
+
+            <div class="form-group">
+              <label for="signup-last">Last Name</label>
+              <input type="text" id="signup-last" required placeholder="Doe" />
+            </div>
+
+            <div class="form-group">
+              <label for="signup-email">ETSU Email</label>
+              <input type="email" id="signup-email" required placeholder="you@etsu.edu" />
+            </div>
+
+            <div class="form-group">
+              <label for="signup-password">Password</label>
+              <input type="password" id="signup-password" required />
+            </div>
+
+            <div class="form-group">
+              <label for="signup-confirm">Confirm Password</label>
+              <input type="password" id="signup-confirm" required />
+            </div>
+
+            <p id="signup-error" class="error-message"></p>
+            <p id="signup-success" class="success-message"></p>
+
+            <button type="submit" class="btn primary">Sign Up</button>
+          </form>
+
+          <p class="helper-text">
+            Already have an account?
+            <button id="go-to-login" class="link-btn">Back to login</button>
+          </p>
+        </div>
+      </section>
+
+      <!-- DASHBOARD SECTION -->
+      <section id="dashboard-section" class="hidden">
+        <div class="dashboard-header">
+          <div>
+            <h2>Student Dashboard</h2>
+            <p id="welcome-text"></p>
+          </div>
+          <button id="logout-btn" class="btn secondary">Logout</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="progress">Progress</button>
+          <button class="tab-btn" data-tab="analytics">Analytics</button>
+          <button class="tab-btn" data-tab="inbox">Inbox</button>
+        </div>
+
+        <!-- PROGRESS TAB -->
+        <div id="tab-progress" class="tab-panel active">
+          <div class="card">
+            <h3>Resume Progress</h3>
+            <p class="helper-text">
+              Track where your resume is in the review process and upload new versions.
+            </p>
+
+            <div class="resume-status">
+              <p><strong>Current file:</strong> <span id="resume-filename">None uploaded</span></p>
+              <p><strong>Status:</strong> <span id="resume-status">N/A</span></p>
+              <p><strong>Last updated:</strong> <span id="resume-updated">N/A</span></p>
+            </div>
+
+            <form id="resume-form" class="resume-form">
+              <div class="form-group">
+                <label for="resume-file">Upload / Replace Resume (PDF only, max 2 MB)</label>
+                <input
+                  type="file"
+                  id="resume-file"
+                  accept=".pdf,application/pdf"
+                />
+              </div>
+
+              <p id="resume-error" class="error-message"></p>
+              <p id="resume-success" class="success-message"></p>
+
+              <button type="submit" class="btn primary">Submit Resume</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ANALYTICS TAB -->
+        <div id="tab-analytics" class="tab-panel">
+          <div class="card">
+            <h3>Resume Analytics</h3>
+            <p class="helper-text">
+              Once your resume is approved and visible to recruiters, you’ll see who is interacting with it here.
+            </p>
+
+            <div class="analytics-summary">
+              <div class="analytics-pill">
+                <span class="analytics-label">Total views</span>
+                <span class="analytics-value" id="analytics-total-views">0</span>
+              </div>
+              <div class="analytics-pill">
+                <span class="analytics-label">Likes / Stars</span>
+                <span class="analytics-value" id="analytics-total-likes">0</span>
+              </div>
+              <div class="analytics-pill">
+                <span class="analytics-label">Last viewed</span>
+                <span class="analytics-value" id="analytics-last-viewed">N/A</span>
+              </div>
+            </div>
+
+            <h4 class="subheading">Activity timeline</h4>
+            <table class="analytics-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Recruiter / Organization</th>
+                  <th>Action</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="analytics-activity-body">
+                <tr class="empty-row">
+                  <td colspan="4">
+                    No activity yet. Your resume is still pending approval.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- INBOX TAB -->
+        <div id="tab-inbox" class="tab-panel">
+          <div class="card">
+            <h3>Inbox</h3>
+            <p class="helper-text">
+              Messages from recruiters will appear here once they start reaching out through CareerFolio.
+            </p>
+
+            <ul class="inbox-list" id="inbox-list">
+              <li class="inbox-empty">
+                No messages yet. When recruiters contact you, their messages will show up here.
+              </li>
+              <!-- Example structure you can demo later:
+              <li class="inbox-item">
+                <div class="inbox-meta">
+                  <span class="inbox-from">Jane Smith · Acme Corp</span>
+                  <span class="inbox-date">12/18/2025 · 09:42 AM</span>
+                </div>
+                <div class="inbox-subject">Interested in your resume for a Software Engineer role</div>
+                <p class="inbox-preview">
+                  Hi Ransome, we came across your profile on CareerFolio and would love to...
+                </p>
+              </li>
+              -->
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>CareerFolio • Built for ETSU resume reviews</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
